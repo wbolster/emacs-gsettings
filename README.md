@@ -52,7 +52,7 @@ using `use-package`), you can use the following functions:
 * `gsettings-reset (schema key)`
 * `gsettings-set-as-string (schema key value)`
 
-Most functions, require the `gsettings` tool to be installed. You can
+Most functions require the `gsettings` tool to be installed. You can
 use the `gsettings-available?` helper as a guard.
 
 License
