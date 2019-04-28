@@ -1,14 +1,59 @@
 gsettings.el
 ============
 
-This Emacs package provides helpers for GSettings, which is the
-configuration system used by the [Gnome](https://www.gnome.org/)
+This Emacs package provides helpers for
+[GSettings](https://developer.gnome.org/gio/stable/GSettings.html),
+the configuration system used by the [Gnome](https://www.gnome.org/)
 desktop.
 
-- https://developer.gnome.org/gio/stable/GSettings.html
+It can be used to read (and set) desktop configuration settings in
+Emacs, which can be useful in `init.el` to set Emacs settings based on
+the desktop configuration.
 
 For parsing of configuration values, this package uses the
 [gvariant.el](https://github.com/wbolster/emacs-gvariant) library.
+
+Installation
+------------
+
+Install `gsettings.el` from Melpa, e.g.
+
+```
+M-x package-install RET gsettings RET
+```
+
+Or, using `use-package`:
+
+```elisp
+(use-package gsettings)
+```
+
+Usage
+-----
+
+Example:
+
+``` elisp
+(use-package gsettings
+  :config
+  (when (gsettings-available?)
+    (blink-cursor-mode (if (gsettings-get "org.gnome.desktop.interface" "cursor-blink") 1 -1))))
+```
+
+After loading the library with `(require 'gsettings)` (not needed when
+using `use-package`), you can use the following functions:
+
+* `gsettings-available? ()`
+* `gsettings-get (schema key)`
+* `gsettings-get-default (schema key default)`
+* `gsettings-list-schemas ()`
+* `gsettings-schema-exists? (schema)`
+* `gsettings-list-keys (schema)`
+* `gsettings-reset (schema key)`
+* `gsettings-set-as-string (schema key value)`
+
+Most functions, require the `gsettings` tool to be installed. You can
+use the `gsettings-available?` helper as a guard.
 
 License
 -------
