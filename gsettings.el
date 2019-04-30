@@ -22,7 +22,7 @@
 ;;   (gsettings-get "org.gnome.desktop.interface" "cursor-blink")
 ;;   (gsettings-get "org.gnome.desktop.interface" "cursor-size")
 ;;   (gsettings-get "org.gnome.desktop.interface" "this-fails")
-;;   (gsettings-set-as-string "org.gnome.desktop.interface" "cursor-blink" "false")
+;;   (gsettings-set-from-gvariant-string "org.gnome.desktop.interface" "cursor-blink" "false")
 
 ;;; Code:
 
@@ -70,7 +70,7 @@ an error, since this is likely caused by buggy code."
   "Reset the SCHEMA KEY to its default value."
   (gsettings--run "reset" schema key))
 
-(defun gsettings-set-as-string (schema key value)
+(defun gsettings-set-from-gvariant-string (schema key value)
   "Set the SCHEMA KEY to the string VALUE.
 
 Note that VALUE should be a valid GVariant string."
