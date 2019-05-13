@@ -6,7 +6,7 @@
 ;; Package-Requires: ((emacs "24.3") (dash "2.16.0") (gvariant "1.0.0") (s "1.12.0"))
 ;; Version: 1.0.0
 
-;; Copyright 2019 wouter bolsterlee. Licensed under the 3-Clause BSD License.
+;; Copyright 2019 wouter bolsterlee. Licensed under the BSD-3-clause license.
 
 ;;; Commentary:
 
