@@ -1,7 +1,5 @@
-License
-=======
-
-BSD-3-clause
+BSD-3-clause License
+====================
 
 Copyright © 2019, wouter bolsterlee
 
