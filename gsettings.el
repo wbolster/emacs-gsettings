@@ -76,6 +76,21 @@ an error, since this is likely caused by buggy code."
 Note that VALUE should be a valid GVariant string."
   (gsettings--run "set" schema key value))
 
+;;;###autoload
+(defun gsettings-apply-gnome-settings ()
+  "Apply some Gnome desktop configuration to Emacs."
+  (interactive)
+  (when (and (gsettings-available?) (gsettings-gnome-running?))
+    (let* ((cursor-blink (gsettings-get "org.gnome.desktop.interface" "cursor-blink"))
+           (monospace-font-name (gsettings-get "org.gnome.desktop.interface" "monospace-font-name"))
+           (monospace-font-family (gsettings--strip-font-size monospace-font-name))
+           (document-font-name (gsettings-get "org.gnome.desktop.interface" "document-font-name"))
+           (document-font-family (gsettings--strip-font-size document-font-name)))
+      (setq font-use-system-font t)     ;; this may not always work
+      (blink-cursor-mode (if cursor-blink 1 -1))
+      (set-face-attribute 'default nil :family monospace-font-family)
+      (set-face-attribute 'variable-pitch nil :family document-font-family))))
+
 (defun gsettings-gnome-running? ()
   "Return whether Emacs is running inside a Gnome environment."
   (-when-let* ((gui-running (display-graphic-p))
@@ -103,6 +118,12 @@ Note that VALUE should be a valid GVariant string."
 (defun gsettings--split-lines (s)
   "Split string S into a list of lines, removing blanks."
   (-remove #'s-blank-str? (s-lines s)))
+
+(defun gsettings--strip-font-size (s)
+  "Strip the font size from a font string S."
+  (->> s
+       (s-replace-regexp "\\(.*\\) [0-9.]+" "\\1")
+       (s-chop-suffixes '(" Medium" " Bold"))))
 
 (provide 'gsettings)
 ;;; gsettings.el ends here
