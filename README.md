@@ -43,14 +43,16 @@ Example:
 After loading the library with `(require 'gsettings)` (not needed when
 using `use-package`), you can use the following functions:
 
-* `gsettings-available? ()`
-* `gsettings-get (schema key)`
-* `gsettings-get-default (schema key default)`
-* `gsettings-list-schemas ()`
-* `gsettings-schema-exists? (schema)`
-* `gsettings-list-keys (schema)`
-* `gsettings-reset (schema key)`
-* `gsettings-set-from-gvariant-string (schema key value)`
+- `gsettings-available? ()`
+- `gsettings-get (schema key)`
+- `gsettings-get-default (schema key default)`
+- `gsettings-list-schemas ()`
+- `gsettings-schema-exists? (schema)`
+- `gsettings-list-keys (schema)`
+- `gsettings-reset (schema key)`
+- `gsettings-set-from-gvariant-string (schema key value)`
+- `gsettings-gnome-running?`
+- `gsettings-apply-gnome-settings`
 
 Most functions require the `gsettings` tool to be installed. You can
 use the `gsettings-available?` helper as a guard.
