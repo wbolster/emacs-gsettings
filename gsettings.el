@@ -76,6 +76,13 @@ an error, since this is likely caused by buggy code."
 Note that VALUE should be a valid GVariant string."
   (gsettings--run "set" schema key value))
 
+(defun gsettings-gnome-running? ()
+  "Return whether Emacs is running inside a Gnome environment."
+  (-when-let* ((gui-running (display-graphic-p))
+               (xdg-current-desktop (getenv "XDG_CURRENT_DESKTOP"))
+               (s-contains-p "gnome" xdg-current-desktop t))
+    t))
+
 (defun gsettings--run (&rest args)
   "Run gsettings using the provided ARGS and return the result as a string."
   (let ((stderr-tempfile (make-temp-file "gsettings-stderr-"))
